@@ -25,6 +25,7 @@ def load_results_from_file():
         if precision_used > decimals_computed:
             print("Something went wrong! It looks like some executions did not go as expected.")
             print(f"Check {algorithm_tag} algorithm")
+            exit(-1)
 
         if algorithm_tag not in results:
             results[algorithm_tag] = dict()
@@ -47,26 +48,26 @@ def load_results_from_file():
 
 
 def generate_algorithm_plots(results):
+    # For each algorithm, generate the times plot and the speed_up plot
     for algorithm_key in results.keys():
-        exec_times_based_on_prec = dict()
-        speed_up_based_on_prec = dict()
+        exec_times = dict()  # exec_times = { precision : list_ex_times }
+        speed_ups = dict()   # speed_ups  = { precision : list_speed_ups }
+        threads_used = list(results[algorithm_key][50000].keys())
+
+        # For each precision, prepare the list of ex_times and compute the speed_ups
         for precision_key in results[algorithm_key].keys():
-            exec_times_based_on_prec[precision_key] = list(results[algorithm_key][precision_key].values())
-            speed_ups = list()
-            for i in range(len(exec_times_based_on_prec[precision_key])):
-                speed_ups.append(
-                    exec_times_based_on_prec[precision_key][0] / exec_times_based_on_prec[precision_key][i])
-            speed_up_based_on_prec[precision_key] = speed_ups
+            exec_times[precision_key] = list(results[algorithm_key][precision_key].values())
+            precision_speed_ups = list()
+            for i in range(len(exec_times[precision_key])):
+                speed_ups.append(exec_times[precision_key][0] / exec_times[precision_key][i])
+            speed_ups[precision_key] = precision_speed_ups
 
-        generate_execution_times_plot(algorithm_name=algorithm_key,
-                                      threads_used=list(results[algorithm_key][50000].keys()),
-                                      execution_times=exec_times_based_on_prec)
-        generate_speed_up_plot(algorithm_name=algorithm_key,
-                               threads_used=list(results[algorithm_key][50000].keys()),
-                               speed_ups=speed_up_based_on_prec)
+        # Generate execution times plot and speed up plots
+        generate_execution_times_plot(algorithm_key, threads_used, exec_times)
+        generate_speed_up_plot(algorithm_key, threads_used, speed_ups)
 
 
-def generate_speed_up_plot(algorithm_name, threads_used, speed_ups, show_title=True):
+def generate_speed_up_plot(algorithm_name, threads_used, speed_ups):
     # Set the figure within the subplot
     fig, ax = plt.subplots(figsize=(9, 6))
 
@@ -85,7 +86,7 @@ def generate_speed_up_plot(algorithm_name, threads_used, speed_ups, show_title=T
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de hebras ', fontdict=font_subtitle)
+    plt.xlabel('Número de hebras', fontdict=font_subtitle)
     plt.ylabel('Escalabilidad ', fontdict=font_subtitle)
     plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=font_title)
 

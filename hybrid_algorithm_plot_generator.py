@@ -4,8 +4,8 @@ import numpy as np
 
 
 # This function returns a dictionary with the executions results median of any algorithm
-#     results = {'algorithm_tag' : { precision : { procs_used  { median_execution_time } } }
-#     results = {'GMP-BBP-BEL-BLC' : { 50000 : { 1 : 20.5, 2 : 10.8, 4 : 6.1 } } }
+#     results = {'algorithm_tag' : { precision : { procs_used  { threads_used : median_execution_time } } } }
+#     results = {'GMP-BBP-BEL-BLC' : { 50000 : { 1 { 1 : 20.5, 2 : 10.8, 4 : 6.1 } } } }
 
 def load_results_from_file():
     file = open(path + file_name, "r")
@@ -18,6 +18,7 @@ def load_results_from_file():
         algorithm_tag = split_line[2]
         precision_used = int(split_line[3])
         procs_used = int(split_line[5])
+        threads_used = int(split_line[6])
         decimals_computed = int(split_line[7])
         execution_time = float(split_line[8])
 
@@ -34,16 +35,20 @@ def load_results_from_file():
             results[algorithm_tag][precision_used] = dict()
 
         if procs_used not in results[algorithm_tag][precision_used]:
-            results[algorithm_tag][precision_used][procs_used] = []
+            results[algorithm_tag][precision_used][procs_used] = dict()
 
-        results[algorithm_tag][precision_used][procs_used].append(execution_time)
+        if threads_used not in results[algorithm_tag][precision_used][procs_used]:
+            results[algorithm_tag][precision_used][procs_used][threads_used] = []
+
+        results[algorithm_tag][precision_used][procs_used][threads_used].append(execution_time)
 
     # Finally, replace the execution times with the median of them in the same dictionary
     for algorithm_key in results.keys():
         for precision_key in results[algorithm_key]:
             for procs_key in results[algorithm_key][precision_key]:
-                results[algorithm_key][precision_key][procs_key] = \
-                    statistics.median(results[algorithm_key][precision_key][procs_key])
+                for threads_used in results[algorithm_key][precision_key][procs_key]:
+                    results[algorithm_key][precision_key][procs_key][threads_used] = \
+                        statistics.median(results[algorithm_key][precision_key][procs_key][threads_used])
 
     return results
 
@@ -53,7 +58,7 @@ def generate_algorithm_plots(results):
     for algorithm_key in results.keys():
         exec_times = dict()  # exec_times = { precision : list_ex_times }
         speed_ups = dict()   # speed_ups  = { precision : list_speed_ups }
-        procs_used = list(results[algorithm_key][50000].keys())
+        procs_and_threads_used = []
 
         # For each precision, prepare the list of ex_times and compute the speed_ups
         for precision_key in results[algorithm_key].keys():
@@ -64,30 +69,30 @@ def generate_algorithm_plots(results):
             speed_ups[precision_key] = precision_speed_ups
 
         # Generate execution times plot and speed up plots
-        generate_execution_times_plot(algorithm_key, procs_used, exec_times)
-        generate_speed_up_plot(algorithm_key, procs_used, speed_ups)
+        generate_execution_times_plot(algorithm_key, procs_and_threads_used, exec_times)
+        generate_speed_up_plot(algorithm_key, procs_and_threads_used, speed_ups)
 
 
-def generate_speed_up_plot(algorithm_name, procs_used, speed_ups):
+def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
     # Set the figure within the subplot
     fig, ax = plt.subplots(figsize=(9, 6))
 
     # Draw the speed-up values for each precision
     i = 0
     for precision in speed_ups.keys():
-        ax.plot(procs_used, speed_ups[precision], color=color_lines[i], marker=marker_styles[i], linestyle='solid',
+        ax.plot(procs_and_threads_used, speed_ups[precision], color=color_lines[i], marker=marker_styles[i], linestyle='solid',
                 linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
     # Set axis limits and steps
-    plt.xticks(np.arange(0, max(procs_used) + 1, 2))
-    plt.yticks(np.arange(0, max(procs_used) + 1, 2))
-    ax.set_ylim([0, max(procs_used) + 1])
-    ax.set_xlim([0, max(procs_used) + 1])
+    plt.xticks(np.arange(0, max(procs_and_threads_used) + 1, 2))
+    plt.yticks(np.arange(0, max(procs_and_threads_used) + 1, 2))
+    ax.set_ylim([0, max(procs_and_threads_used) + 1])
+    ax.set_xlim([0, max(procs_and_threads_used) + 1])
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de hebras ', fontdict=font_subtitle)
+    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=font_subtitle)
     plt.ylabel('Escalabilidad ', fontdict=font_subtitle)
     plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=font_title)
 
@@ -99,25 +104,25 @@ def generate_speed_up_plot(algorithm_name, procs_used, speed_ups):
     plt.close()
 
 
-def generate_execution_times_plot(algorithm_name, procs_used, execution_times):
+def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execution_times):
     # Set the figure within the subplot
     fig, ax = plt.subplots(figsize=(9, 6))
 
     # Draw the execution times for each precision
     i = 0
     for precision in execution_times.keys():
-        ax.plot(procs_used, execution_times[precision], color=color_lines[i], marker=marker_styles[i],
+        ax.plot(procs_and_threads_used, execution_times[precision], color=color_lines[i], marker=marker_styles[i],
                 linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
     # Set axis limits and steps
-    plt.xticks(np.arange(0, max(procs_used) + 1, 2))
-    ax.set_xlim([0, max(procs_used) + 1])
+    plt.xticks(np.arange(0, max(procs_and_threads_used) + 1, 2))
+    ax.set_xlim([0, max(procs_and_threads_used) + 1])
     # ax.set_ylim([execution_times[50000][-1], execution_times[200000][0]])
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos', fontdict=font_subtitle)
+    plt.xlabel('Número de hebras ', fontdict=font_subtitle)
     plt.ylabel('Tiempo de ejecución (s)', fontdict=font_subtitle)
     plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=font_title)
 
@@ -134,8 +139,8 @@ def generate_execution_times_plot(algorithm_name, procs_used, execution_times):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    path = 'results/mpi-2022-12/'
-    file_name = 'results-mpi-2022-12.csv'
+    path = 'results/hyb-2022-12/'
+    file_name = 'results-hyb-2022-12.csv'
 
     # Define the styles
     color_lines = ['#5383EC', '#D85040', '#F2BF41']
