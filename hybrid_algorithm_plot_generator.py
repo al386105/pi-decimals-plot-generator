@@ -1,6 +1,7 @@
 import statistics
 import matplotlib.pyplot as plt
 import numpy as np
+import styles
 
 
 # This function returns a dictionary with the executions results median of any algorithm
@@ -80,8 +81,8 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
     # Draw the speed-up values for each precision
     i = 0
     for precision in speed_ups.keys():
-        ax.plot(procs_and_threads_used, speed_ups[precision], color=color_lines[i], marker=marker_styles[i], linestyle='solid',
-                linewidth=1.5, markersize=5, label=f"prec. {precision}")
+        ax.plot(procs_and_threads_used, speed_ups[precision], color=styles.COLOR_LINES[i], marker=styles.MARKER_STYLES[i],
+                linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
     # Set axis limits and steps
@@ -92,9 +93,9 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=font_subtitle)
-    plt.ylabel('Escalabilidad ', fontdict=font_subtitle)
-    plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=font_title)
+    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.FONT_SUBTITLE)
+    plt.ylabel('Escalabilidad ', fontdict=styles.FONT_SUBTITLE)
+    plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
 
     # Show legend
     plt.legend(loc='upper left')
@@ -111,8 +112,8 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     # Draw the execution times for each precision
     i = 0
     for precision in execution_times.keys():
-        ax.plot(procs_and_threads_used, execution_times[precision], color=color_lines[i], marker=marker_styles[i],
-                linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
+        ax.plot(procs_and_threads_used, execution_times[precision], color=styles.COLOR_LINES[i],
+                marker=styles.MARKER_STYLES[i], linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
     # Set axis limits and steps
@@ -122,9 +123,9 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de hebras ', fontdict=font_subtitle)
-    plt.ylabel('Tiempo de ejecución (s)', fontdict=font_subtitle)
-    plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=font_title)
+    plt.xlabel('Número de hebras ', fontdict=styles.FONT_SUBTITLE)
+    plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.FONT_SUBTITLE)
+    plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
 
     # Set logarithmic scale on y
     plt.yscale('log')
@@ -140,14 +141,7 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
 if __name__ == '__main__':
     # Set file and path to store the plots
     path = 'results/hyb-2022-12/'
-    file_name = 'results-hyb-2022-12.csv'
-
-    # Define the styles
-    color_lines = ['#5383EC', '#D85040', '#F2BF41']
-    marker_styles = ['o', '^', 's']
-    font_title = {'family': 'serif', 'color': 'black', 'weight': 'bold', 'size': 12}
-    font_subtitle = {'family': 'serif', 'color': 'black', 'weight': 'normal', 'size': 11}
-    font_text = {'family': 'serif', 'color': 'black', 'weight': 'normal', 'size': 11}
+    file_name = 'results.csv'
 
     data = load_results_from_file()
     print(data)
