@@ -6,7 +6,6 @@ import styles
 
 # This function returns a dictionary with the executions results median of any algorithm
 #     results = {'algorithm_tag' : { precision : { procs_used  { threads_used : median_execution_time } } } }
-#     results = {'GMP-BBP-BEL-BLC' : { 50000 : { 1 { 1 : 20.5, 2 : 10.8, 4 : 6.1 } } } }
 
 def load_results_from_file():
     file = open(path + file_name, "r")
@@ -119,7 +118,6 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     # Set axis limits and steps
     plt.xticks(np.arange(0, max(procs_and_threads_used) + 1, 2))
     ax.set_xlim([0, max(procs_and_threads_used) + 1])
-    # ax.set_ylim([execution_times[50000][-1], execution_times[200000][0]])
     plt.grid(axis='y')
 
     # Set tittles:

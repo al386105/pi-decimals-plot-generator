@@ -113,7 +113,6 @@ def generate_execution_times_plot(algorithm_name, threads_used, execution_times)
     # Set axis limits and steps
     plt.xticks(np.arange(0, max(threads_used) + 1, 2))
     ax.set_xlim([0, max(threads_used) + 1])
-    # ax.set_ylim([execution_times[50000][-1], execution_times[200000][0]])
     plt.grid(axis='y')
 
     # Set tittles:

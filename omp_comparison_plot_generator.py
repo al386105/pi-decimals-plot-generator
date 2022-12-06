@@ -87,7 +87,7 @@ def generate_comparison_speed_up_plot(threads_used, speed_ups):
     # Set tittles:
     plt.xlabel('Número de hebras', fontdict=styles.FONT_SUBTITLE)
     plt.ylabel('Escalabilidad ', fontdict=styles.FONT_SUBTITLE)
-    plt.title("Comparación de la escalabilidad de los algoritmos \n con el paradigma de progamación con OpenMP", fontdict=styles.FONT_TITLE)
+    plt.title("Comparación de la escalabilidad de los algoritmos \n con el paradigma de OpenMP", fontdict=styles.FONT_TITLE)
 
     # Show legend
     plt.legend(loc='upper left')
@@ -111,13 +111,12 @@ def generate_comparison_execution_times_plot(threads_used, execution_times):
     # Set axis limits and steps
     plt.xticks(np.arange(0, max(threads_used) + 1, 2))
     ax.set_xlim([0, max(threads_used) + 1])
-    # ax.set_ylim([execution_times[50000][-1], execution_times[200000][0]])
     plt.grid(axis='y')
 
     # Set tittles:
     plt.xlabel('Número de hebras', fontdict=styles.FONT_SUBTITLE)
     plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.FONT_SUBTITLE)
-    plt.title("Comparación de los tiempos de ejecución de los algoritmos \n con el paradigma de programación con OpenMP", fontdict=styles.FONT_TITLE)
+    plt.title("Comparación de los tiempos de ejecución de los algoritmos \n con el paradigma de OpenMP", fontdict=styles.FONT_TITLE)
 
     # Set logarithmic scale on y
     plt.yscale('log')
