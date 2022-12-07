@@ -26,6 +26,9 @@ def load_results_from_file():
         if precision_used != 200000:
             continue
 
+        if algorithm_tag in excluded_algorithms:
+            continue
+
         if threads_used > 1:
             print("Something went wrong! It looks like some executions use more than one thread (hybrid) ")
             exit(-1)
@@ -137,6 +140,7 @@ if __name__ == '__main__':
     # Set file and path to store the plots
     path = 'results/mpi-2022-12/'
     file_name = 'results.csv'
+    excluded_algorithms = []
 
     data = load_results_from_file()
     generate_comparison_plots(data)

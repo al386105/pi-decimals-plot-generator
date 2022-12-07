@@ -121,7 +121,7 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de hebras ', fontdict=styles.FONT_SUBTITLE)
+    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.FONT_SUBTITLE)
     plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.FONT_SUBTITLE)
     plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
 

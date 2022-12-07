@@ -25,6 +25,9 @@ def load_results_from_file():
         if precision_used != 200000:
             continue
 
+        if algorithm_tag in excluded_algorithms:
+            continue
+
         # Check if the decimals computed are greater than the desired:
         if precision_used > decimals_computed:
             print("Something went wrong! It looks like some executions did not go as expected.")
@@ -133,6 +136,7 @@ if __name__ == '__main__':
     # Set file and path to store the plots
     path = 'results/omp-2022-12/'
     file_name = 'results.csv'
+    excluded_algorithms = ['GMP-BBP-CYC', 'GMP-CHD-BLC-CAF', 'GMP-CHD-BLC-SME', 'GMP-CHD-CHT-SME']
 
     data = load_results_from_file()
     generate_comparison_plots(data)
