@@ -1,5 +1,6 @@
-import matplotlib.pyplot as plt
+import statistics
 import styles
+import matplotlib.pyplot as plt
 
 
 def load_iteration_times_from_file():
@@ -10,13 +11,14 @@ def load_iteration_times_from_file():
         split_line = line.split(';')
         if len(split_line) > 1:
             algorithm_tag = split_line[2]
-            generate_iteration_times_plot(algorithm_tag, iteration_times)
+            precision_used = split_line[3]
+            generate_iteration_times_plot(algorithm_tag, iteration_times, precision_used)
             iteration_times.clear()
         else:
-            iteration_times.append(float(line))
+            iteration_times.append(float(line) * 1000)
 
 
-def generate_iteration_times_plot(algorithm_name, iteration_times):
+def generate_iteration_times_plot(algorithm_name, iteration_times, precision_used):
     # Set the figure within the subplot
     fig, ax = plt.subplots(figsize=(9, 6))
 
@@ -24,8 +26,18 @@ def generate_iteration_times_plot(algorithm_name, iteration_times):
 
     # Set tittles:
     plt.xlabel('Iteración', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Tiempo (s)', fontdict=styles.FONT_SUBTITLE)
-    plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
+    plt.ylabel('Tiempo (ms)', fontdict=styles.FONT_SUBTITLE)
+    plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n "
+              f"para calcular los primeros {precision_used} decimales", fontdict=styles.FONT_TITLE)
+
+    # Print text with mean, median...
+    text = f"Avg: {round(statistics.mean(iteration_times), 2)} ms\n" \
+           f"Median: {round(statistics.median(iteration_times), 2)} ms\n" \
+           f"Max: {round(max(iteration_times), 2)} ms\n" \
+           f"Min: {round(min(iteration_times), 2)} ms\n" \
+           f"Iterations: {len(iteration_times)}"
+    plt.text(0.02, 0.97, text, ha='left', va='top', transform=ax.transAxes, fontdict=styles.FONT_TEXT,
+             bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
 
     # Save figure and close
     plt.savefig(f"{path}IT-{algorithm_name}.png")
@@ -35,6 +47,6 @@ def generate_iteration_times_plot(algorithm_name, iteration_times):
 if __name__ == '__main__':
     # Set file and path to store the plots
     path = 'results/iterations-2022-12/'
-    file_name = 'omp-iterations.csv'
+    file_name = 'omp-iterations2.csv'
 
     load_iteration_times_from_file()
