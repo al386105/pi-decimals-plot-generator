@@ -8,7 +8,7 @@ import styles
 #     results = {'algorithm_tag' : { procs_used : median_execution_time } }
 
 def load_results_from_file():
-    file = open(path + file_name, "r")
+    file = open(results_path, "r")
 
     results = dict()
 
@@ -100,7 +100,7 @@ def generate_comparison_speed_up_plot(procs_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path}SU-COMPARISON-OMP.png")
+    plt.savefig(f"{path_to_save}SU-COMPARISON.png")
     plt.close()
 
 
@@ -132,15 +132,15 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path}EX-COMPARISON-OMP.png")
+    plt.savefig(f"{path_to_save}EX-COMPARISON.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    path = 'results/mpi-2022-12/'
-    file_name = 'results.csv'
-    excluded_algorithms = []
+    results_path = 'results/mpi/results-2022-12.csv'
+    path_to_save = 'plots/mpi/'
+    excluded_algorithms = ['GMP-CHD-BLC-BLC-SME']
 
     data = load_results_from_file()
     generate_comparison_plots(data)

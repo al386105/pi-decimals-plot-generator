@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def load_iteration_times_from_file():
-    file = open(path + file_name, "r")
+    file = open(results_path, "r")
 
     iteration_times = []
     for line in file:
@@ -40,13 +40,13 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
              bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
 
     # Save figure and close
-    plt.savefig(f"{path}IT-{algorithm_name}.png")
+    plt.savefig(f"{path_to_save}IT-{algorithm_name}.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    path = 'results/iterations-2022-12/'
-    file_name = 'omp-iterations2.csv'
+    results_path = 'results/iterations/omp-iterations-2022-12-a.csv'
+    path_to_save = 'plots/iterations/'
 
     load_iteration_times_from_file()

@@ -8,7 +8,7 @@ import styles
 #     results = {'algorithm_tag' : { threads_used : median_execution_time } }
 
 def load_results_from_file():
-    file = open(path + file_name, "r")
+    file = open(results_path, "r")
 
     results = dict()
 
@@ -96,7 +96,7 @@ def generate_comparison_speed_up_plot(threads_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path}SU-COMPARISON-OMP.png")
+    plt.savefig(f"{path_to_save}SU-COMPARISON.png")
     plt.close()
 
 
@@ -128,14 +128,14 @@ def generate_comparison_execution_times_plot(threads_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path}EX-COMPARISON-OMP.png")
+    plt.savefig(f"{path_to_save}EX-COMPARISON.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    path = 'results/omp-2022-12/'
-    file_name = 'results.csv'
+    results_path = 'results/omp/results-2022-12.csv'
+    path_to_save = 'plots/omp/'
     excluded_algorithms = ['GMP-BBP-CYC', 'GMP-CHD-BLC-CAF', 'GMP-CHD-BLC-SME', 'GMP-CHD-CHT-SME']
 
     data = load_results_from_file()
