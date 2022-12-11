@@ -96,7 +96,7 @@ def generate_comparison_speed_up_plot(threads_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}SU-COMPARISON.png")
+    plt.savefig(f"{path_to_save}su-comparison.png")
     plt.close()
 
 
@@ -128,7 +128,7 @@ def generate_comparison_execution_times_plot(threads_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}EX-COMPARISON.png")
+    plt.savefig(f"{path_to_save}ex-comparison.png")
     plt.close()
 
 

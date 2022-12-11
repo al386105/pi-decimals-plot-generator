@@ -127,7 +127,7 @@ def generate_execution_times_plot(algorithm_name, threads_used, execution_times)
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}EX-{algorithm_name}.png")
+    plt.savefig(f"{path_to_save}ex-{algorithm_name.lower()}.png")
     plt.close()
 
 

@@ -14,19 +14,14 @@ def load_results_from_file():
         split_line = line_result.split(';')
         algorithm_tag = split_line[2]
         precision_used = int(split_line[3])
-        procs_used = int(split_line[5])
-        threads_used = int(split_line[6])
-        decimals_computed = int(split_line[7])
-        execution_time = float(split_line[8])
+        threads_used = int(split_line[5])
+        decimals_computed = int(split_line[6])
+        execution_time = float(split_line[7])
 
         # Check if the decimals computed are greater than the desired:
         if precision_used > decimals_computed:
             print("Something went wrong! It looks like some executions did not go as expected.")
             print(f"Check {algorithm_tag} algorithm")
-            exit(-1)
-
-        if threads_used > 1:
-            print("Something went wrong! It looks like some executions use more than one thread (hybrid) ")
             exit(-1)
 
         if algorithm_tag not in results:
@@ -35,17 +30,17 @@ def load_results_from_file():
         if precision_used not in results[algorithm_tag]:
             results[algorithm_tag][precision_used] = dict()
 
-        if procs_used not in results[algorithm_tag][precision_used]:
-            results[algorithm_tag][precision_used][procs_used] = []
+        if threads_used not in results[algorithm_tag][precision_used]:
+            results[algorithm_tag][precision_used][threads_used] = []
 
-        results[algorithm_tag][precision_used][procs_used].append(execution_time)
+        results[algorithm_tag][precision_used][threads_used].append(execution_time)
 
     # Finally, replace the execution times with the median of them in the same dictionary
     for algorithm_key in results.keys():
         for precision_key in results[algorithm_key]:
-            for procs_key in results[algorithm_key][precision_key]:
-                median_rounded = str(round(statistics.median(results[algorithm_key][precision_key][procs_key]), 2))
-                results[algorithm_key][precision_key][procs_key] = median_rounded.replace('.', ',')
+            for threads_key in results[algorithm_key][precision_key]:
+                median_rounded = str(round(statistics.median(results[algorithm_key][precision_key][threads_key]), 2))
+                results[algorithm_key][precision_key][threads_key] = median_rounded.replace('.', ',')
 
     return results
 
@@ -55,10 +50,9 @@ def get_latex_table(results):
     for algorithm_key in results.keys():
         times = list(results[algorithm_key][default_precision].values())
         row = "\t" + algorithm_key
-        row += (24 - len(row)) * " "
-        for i, time in enumerate(times):
-            if i * 10 not in procs_to_show:
-                continue
+        # Add blank spaces
+        row += (20 - len(row)) * " "
+        for time in times:
             string_time = f"& {time}"
             string_time += (12 - len(string_time)) * " "
             row += string_time
@@ -70,12 +64,12 @@ def get_latex_table(results):
                   "\\large\n" \
                   "\\caption{Tiempos de ejecución (en segundos) de los algoritmos y librerías con " \
                   + str(default_precision) + \
-                  " decimales de precisión y utilizando el paradigma de programación con MPI.}\n" \
-                  "\\label{table:mpi-comparison}\n" \
+                  " decimales de precisión y utilizando el paradigma de programación con OpenMP.}\n" \
+                  "\\label{table:omp-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \
-                  "\t\\multirow{2}{*}{\\textbf{Algoritmo}} & \multicolumn{7}{ | c | }{\\textbf{Número de procesos}} \\\\\n" \
-                  "\t\\cline{2-8} & \\textbf{1} & \\textbf{10} & \\textbf{40} & \\textbf{80} & \\textbf{120} & \\textbf{160} & \\textbf{200} \\\\\n" \
+                  "\t\\multirow{2}{*}{\\textbf{Algoritmo}} & \multicolumn{7}{ | c | }{\\textbf{Número de hebras}} \\\\\n" \
+                  "\t\\cline{2-8} & \\textbf{1} & \\textbf{2} & \\textbf{4} & \\textbf{8} & \\textbf{12} & \\textbf{16} & \\textbf{20} \\\\\n" \
                   "\t\\hline\n" \
                   + data_rows + \
                   "\\end{tabular}\n" \
@@ -86,13 +80,13 @@ def get_latex_table(results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/mpi/results-2022-12.csv'
-    path_to_save = 'tables/mpi/'
+    results_path = 'results/omp/results-2022-12.csv'
+    path_to_save = 'tables/omp/'
     default_precision = 200000
-    procs_to_show = [0, 10, 40, 80, 120, 160, 200]  # 0 means 1 proc
 
     data = load_results_from_file()
 
     file = open(path_to_save + "ex-comparison.tex", "w")
     file.write(get_latex_table(data))
     file.close()
+

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import styles
 
+
 # This function returns a dictionary with the executions results median of any algorithm
 #     results = {'algorithm_tag' : { precision : { procs_used  { median_execution_time } } }
 
@@ -99,7 +100,7 @@ def generate_speed_up_plot(algorithm_name, procs_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}SU-{algorithm_name}.png")
+    plt.savefig(f"{path_to_save}su-{algorithm_name.lower()}.png")
     plt.close()
 
 
@@ -131,7 +132,7 @@ def generate_execution_times_plot(algorithm_name, procs_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}EX-{algorithm_name}.png")
+    plt.savefig(f"{path_to_save}ex-{algorithm_name.lower()}.png")
     plt.close()
 
 

@@ -40,7 +40,7 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
              bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}IT-{algorithm_name}.png")
+    plt.savefig(f"{path_to_save}it-{algorithm_name.lower()}.png")
     plt.close()
 
 
