@@ -25,10 +25,11 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
     ax.plot(iteration_times)
 
     # Set tittles:
-    plt.xlabel('Iteración', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Tiempo (ms)', fontdict=styles.FONT_SUBTITLE)
-    plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n "
-              f"para calcular los primeros {precision_used} decimales", fontdict=styles.FONT_TITLE)
+    plt.xlabel('Iteración', fontdict=styles.font_subtitle)
+    plt.ylabel('Tiempo (ms)', fontdict=styles.font_subtitle)
+    if styles.show_plots_title:
+        plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n "
+              f"para calcular los primeros {precision_used} decimales", fontdict=styles.font_title)
 
     # Print text with mean, median...
     text = f"Avg: {round(statistics.mean(iteration_times), 2)} ms\n" \
@@ -36,7 +37,7 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
            f"Max: {round(max(iteration_times), 2)} ms\n" \
            f"Min: {round(min(iteration_times), 2)} ms\n" \
            f"Iterations: {len(iteration_times)}"
-    plt.text(0.02, 0.97, text, ha='left', va='top', transform=ax.transAxes, fontdict=styles.FONT_TEXT,
+    plt.text(0.02, 0.97, text, ha='left', va='top', transform=ax.transAxes, fontdict=styles.font_text,
              bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
 
     # Save figure and close

@@ -72,7 +72,7 @@ def get_latex_table(algorithm_tag, results):
                   + algorithm_tag + \
                   " utilizando el paradigma de programación con MPI.}\n" \
                   "\\label{" \
-                  f"table:mpi{algorithm_tag.lower()}" \
+                  f"table:mpi-{algorithm_tag.lower()}" \
                   "}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \

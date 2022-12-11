@@ -80,7 +80,7 @@ def generate_comparison_speed_up_plot(procs_used, speed_ups):
     # Draw the speed-up values for each precision
     i = 0
     for algorithm in speed_ups.keys():
-        ax.plot(procs_used, speed_ups[algorithm], color=styles.COLOR_LINES[i], marker=styles.MARKER_STYLES[i],
+        ax.plot(procs_used, speed_ups[algorithm], color=styles.color_lines[i], marker=styles.marker_styles[i],
                 linestyle='solid', linewidth=1.5, markersize=5, label=algorithm)
         i += 1
 
@@ -92,9 +92,10 @@ def generate_comparison_speed_up_plot(procs_used, speed_ups):
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Escalabilidad ', fontdict=styles.FONT_SUBTITLE)
-    plt.title("Comparación de la escalabilidad de los algoritmos \n con el paradigma de MPI", fontdict=styles.FONT_TITLE)
+    plt.xlabel('Número de procesos', fontdict=styles.font_subtitle)
+    plt.ylabel('Escalabilidad ', fontdict=styles.font_subtitle)
+    if styles.show_plots_title:
+        plt.title("Comparación de la escalabilidad de los algoritmos \n con el paradigma de MPI", fontdict=styles.font_title)
 
     # Show legend
     plt.legend(loc='upper left')
@@ -111,7 +112,7 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
     # Draw the execution times for each precision
     i = 0
     for algorithm in execution_times.keys():
-        ax.plot(procs_used, execution_times[algorithm], color=styles.COLOR_LINES[i], marker=styles.MARKER_STYLES[i],
+        ax.plot(procs_used, execution_times[algorithm], color=styles.color_lines[i], marker=styles.marker_styles[i],
                 linestyle='solid', linewidth=1.5, markersize=5, label=algorithm)
         i += 1
 
@@ -121,9 +122,10 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.FONT_SUBTITLE)
-    plt.title("Comparación de los tiempos de ejecución de los algoritmos \n con el paradigma de MPI", fontdict=styles.FONT_TITLE)
+    plt.xlabel('Número de procesos', fontdict=styles.font_subtitle)
+    plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.font_subtitle)
+    if styles.show_plots_title:
+        plt.title("Comparación de los tiempos de ejecución de los algoritmos \n con el paradigma de MPI", fontdict=styles.font_title)
 
     # Set logarithmic scale on y
     plt.yscale('log')

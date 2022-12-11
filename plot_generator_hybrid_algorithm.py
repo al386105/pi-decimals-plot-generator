@@ -80,7 +80,7 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
     # Draw the speed-up values for each precision
     i = 0
     for precision in speed_ups.keys():
-        ax.plot(procs_and_threads_used, speed_ups[precision], color=styles.COLOR_LINES[i], marker=styles.MARKER_STYLES[i],
+        ax.plot(procs_and_threads_used, speed_ups[precision], color=styles.color_lines[i], marker=styles.marker_styles[i],
                 linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
@@ -92,9 +92,10 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Escalabilidad ', fontdict=styles.FONT_SUBTITLE)
-    plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
+    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.font_subtitle)
+    plt.ylabel('Escalabilidad ', fontdict=styles.font_subtitle)
+    if styles.show_plots_title:
+        plt.title(f"Escalabilidad del algoritmo {algorithm_name}", fontdict=styles.font_title)
 
     # Show legend
     plt.legend(loc='upper left')
@@ -111,8 +112,8 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     # Draw the execution times for each precision
     i = 0
     for precision in execution_times.keys():
-        ax.plot(procs_and_threads_used, execution_times[precision], color=styles.COLOR_LINES[i],
-                marker=styles.MARKER_STYLES[i], linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
+        ax.plot(procs_and_threads_used, execution_times[precision], color=styles.color_lines[i],
+                marker=styles.marker_styles[i], linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
     # Set axis limits and steps
@@ -121,9 +122,10 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
     plt.grid(axis='y')
 
     # Set tittles:
-    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.FONT_SUBTITLE)
-    plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.FONT_SUBTITLE)
-    plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=styles.FONT_TITLE)
+    plt.xlabel('Número de procesos y hebras por proceso (p/h)', fontdict=styles.font_subtitle)
+    plt.ylabel('Tiempo de ejecución (s)', fontdict=styles.font_subtitle)
+    if styles.show_plots_title:
+        plt.title(f"Tiempos de ejecución del algoritmo {algorithm_name}", fontdict=styles.font_title)
 
     # Set logarithmic scale on y
     plt.yscale('log')
