@@ -4,50 +4,6 @@ import numpy as np
 import styles
 
 
-# This function returns a dictionary with the executions results median of any algorithm
-#     results = {'algorithm_tag' : { precision : { threads_used : median_execution_time } } } }
-#     results = {'GMP-BBP-BEL-BLC' : {50000 : {1 : 20.5, 2 : 10.8, 4 : 6.1}} }
-
-def load_results_from_file():
-    file = open(results_path, "r")
-
-    results = dict()
-
-    # Iterate the file results, each line file is an execution result and store it in a dictionary
-    for line_result in file:
-        split_line = line_result.split(';')
-        algorithm_tag = split_line[2]
-        precision_used = int(split_line[3])
-        threads_used = int(split_line[5])
-        decimals_computed = int(split_line[6])
-        execution_time = float(split_line[7])
-
-        # Check if the decimals computed are greater than the desired:
-        if precision_used > decimals_computed:
-            print("Something went wrong! It looks like some executions did not go as expected.")
-            print(f"Check {algorithm_tag} algorithm")
-            exit(-1)
-
-        if algorithm_tag not in results:
-            results[algorithm_tag] = dict()
-
-        if precision_used not in results[algorithm_tag]:
-            results[algorithm_tag][precision_used] = dict()
-
-        if threads_used not in results[algorithm_tag][precision_used]:
-            results[algorithm_tag][precision_used][threads_used] = []
-        results[algorithm_tag][precision_used][threads_used].append(execution_time)
-
-    # Finally, replace the execution times with the median of them in the same dictionary
-    for algorithm_key in results.keys():
-        for precision_key in results[algorithm_key]:
-            for thread_key in results[algorithm_key][precision_key]:
-                results[algorithm_key][precision_key][thread_key] = statistics.median(
-                    results[algorithm_key][precision_key][thread_key])
-
-    return results
-
-
 def generate_algorithm_plots(results):
     # For each algorithm, generate the times plot and the speed_up plot
     for algorithm_key in results.keys():
@@ -58,9 +14,7 @@ def generate_algorithm_plots(results):
         # For each precision, prepare the list of ex_times and compute the speed_ups
         for precision_key in results[algorithm_key].keys():
             exec_times[precision_key] = list(results[algorithm_key][precision_key].values())
-            precision_speed_ups = list()
-            for i in range(len(exec_times[precision_key])):
-                precision_speed_ups.append(exec_times[precision_key][0] / exec_times[precision_key][i])
+            precision_speed_ups = [exec_times[precision_key][0] / exec_times[precision_key][i] for i in range(len(exec_times[precision_key]))]
             speed_ups[precision_key] = precision_speed_ups
 
         # Generate execution times plot and speed up plots
