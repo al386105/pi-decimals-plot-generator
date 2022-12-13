@@ -1,23 +1,7 @@
+from data_loader import load_mpi_results_from_file
 import matplotlib.pyplot as plt
 import numpy as np
 import styles
-
-
-def generate_comparison_plots(results):
-    # Generate the times plot and the speed_up plot
-    exec_times = dict()  # exec_times = { algorithm_tag : list_ex_times }
-    speed_ups = dict()   # speed_ups  = { algorithm_tag : list_speed_ups }
-    procs_used = list()
-
-    for algorithm_key in results.keys():
-        exec_times[algorithm_key] = list(results[algorithm_key].values())
-        procs_used = list(results[algorithm_key].keys())
-        algorithm_speed_ups = [exec_times[algorithm_key][0] / exec_times[algorithm_key][i] for i in range(len(exec_times[algorithm_key]))]
-        speed_ups[algorithm_key] = algorithm_speed_ups
-
-    # Generate execution times plot and speed up plots
-    generate_comparison_execution_times_plot(procs_used, exec_times)
-    generate_comparison_speed_up_plot(procs_used, speed_ups)
 
 
 def generate_comparison_speed_up_plot(procs_used, speed_ups):
@@ -90,5 +74,18 @@ if __name__ == '__main__':
     results_path = 'results/mpi/results-2022-12.csv'
     path_to_save = 'plots/mpi/'
 
-    data = load_results_from_file()
-    generate_comparison_plots(data)
+    data = load_mpi_results_from_file(results_path)
+
+    # Generate the times plot and the speed_up plot
+    exec_times = dict()  # exec_times = { algorithm_tag : list_ex_times }
+    speed_ups = dict()   # speed_ups  = { algorithm_tag : list_speed_ups }
+    procs_used = list()
+    for algorithm_key in data.keys():
+        exec_times[algorithm_key] = list(data[algorithm_key][styles.default_comparison_precision].values())
+        procs_used = list(data[algorithm_key][styles.default_comparison_precision].keys())
+        algorithm_speed_ups = [exec_times[algorithm_key][0] / exec_times[algorithm_key][i] for i in range(len(exec_times[algorithm_key]))]
+        speed_ups[algorithm_key] = algorithm_speed_ups
+
+    # Generate execution times plot and speed up plots
+    generate_comparison_execution_times_plot(procs_used, exec_times)
+    generate_comparison_speed_up_plot(procs_used, speed_ups)

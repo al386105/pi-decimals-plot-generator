@@ -1,3 +1,4 @@
+from data_loader import load_mpi_results_from_file
 import matplotlib.pyplot as plt
 import numpy as np
 import styles
@@ -91,5 +92,5 @@ if __name__ == '__main__':
     results_path = 'results/mpi/results-2022-12.csv'
     path_to_save = 'plots/mpi/'
 
-    data = load_results_from_file()
+    data = load_mpi_results_from_file(results_path)
     generate_algorithm_plots(data)

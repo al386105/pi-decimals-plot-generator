@@ -1,5 +1,7 @@
 show_plots_title = False
-mpi_algorithms_excluded = []
+default_comparison_precision = 200_000
+mpi_algorithms_excluded = ['GMP-CHD-CHT-BLC-SME']
+omp_algorithms_excluded = ['GMP-CHD-CHT-SME']
 color_lines = ['#5383EC', '#D85040', '#F2BF41', '#34A853', '#FF6D01', '#46BDC6', '#9900FF', '#804000', '#FF0080', '#000000']
 marker_styles = ['o', '^', 's', 'd', 'p', 'h', '*', 'x', '+', '1']
 font_title = {'family': 'serif', 'color': 'black', 'weight': 'bold', 'size': 13}

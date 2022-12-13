@@ -1,4 +1,4 @@
-import statistics
+from data_loader import load_omp_results_from_file
 import matplotlib.pyplot as plt
 import numpy as np
 import styles
@@ -92,5 +92,5 @@ if __name__ == '__main__':
     results_path = 'results/omp/results-2022-12.csv'
     path_to_save = 'plots/omp/'
 
-    data = load_results_from_file()
+    data = load_omp_results_from_file(results_path)
     generate_algorithm_plots(data)

@@ -8,12 +8,11 @@ def get_execution_time_latex_table(algorithm_tag, results):
         row = "\t" + str(precision_key)
         row += (8 - len(row)) * " "
         for i, time in enumerate(times):
-            if i * 10 not in procs_to_show:
-                continue
-            string_time = f"& {round(time, 2)}"
-            string_time.replace('.', ',')
-            string_time += (12 - len(string_time)) * " "
-            row += string_time
+            if i * 10 in procs_to_show:
+                string_time = f"& {round(time, 2)}"
+                string_time = string_time.replace('.', ',')
+                string_time += (12 - len(string_time)) * " "
+                row += string_time
         row += "\\\\ \n\t\\hline \n"
         data_rows += row
 
@@ -46,12 +45,11 @@ def get_speed_up_latex_table(algorithm_tag, results):
         row = "\t" + str(precision_key)
         row += (8 - len(row)) * " "
         for i, speed_up in enumerate(speed_ups):
-            if i * 10 not in procs_to_show:
-                continue
-            string_su = f"& {round(speed_up, 2)}"
-            string_su.replace('.', ',')
-            string_su += (10 - len(string_su)) * " "
-            row += string_su
+            if i * 10 in procs_to_show:
+                string_su = f"& {round(speed_up, 2)}"
+                string_su = string_su.replace('.', ',')
+                string_su += (10 - len(string_su)) * " "
+                row += string_su
         row += "\\\\ \n\t\\hline \n"
         data_rows += row
 

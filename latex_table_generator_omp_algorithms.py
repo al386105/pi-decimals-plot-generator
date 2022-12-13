@@ -1,13 +1,15 @@
+from data_loader import load_omp_results_from_file
+
 
 def get_execution_time_latex_table(algorithm_tag, results):
     data_rows = ""
     for precision_key in results.keys():
         times = list(results[precision_key].values())
         row = "\t" + str(precision_key)
-        # Add blank spaces
         row += (8 - len(row)) * " "
         for time in times:
-            string_time = f"& {time}"
+            string_time = f"& {round(time, 2)}"
+            string_time = string_time.replace('.', ',')
             string_time += (12 - len(string_time)) * " "
             row += string_time
         row += "\\\\ \n\t\\hline \n"
@@ -38,14 +40,12 @@ def get_speed_up_latex_table(algorithm_tag, results):
     data_rows = ""
     for precision_key in results.keys():
         times = list(results[precision_key].values())
-        speed_ups = list()
-        for i in range(len(times)):
-            speed_ups.append(times[0] / times[i])
+        speed_ups = [times[0] / times[i] for i in range(len(times))]
         row = "\t" + str(precision_key)
-        # Add blank spaces
         row += (8 - len(row)) * " "
         for speed_up in speed_ups:
-            string_su = f"& {speed_up}"
+            string_su = f"& {round(speed_up, 2)}"
+            string_su = string_su.replace('.', ',')
             string_su += (10 - len(string_su)) * " "
             row += string_su
         row += "\\\\ \n\t\\hline \n"
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     results_path = 'results/omp/results-2022-12.csv'
     path_to_save = 'tables/omp/'
 
-    data = load_results_from_file()
+    data = load_omp_results_from_file(results_path)
 
     for algorithm in data.keys():
         file = open(path_to_save + f"ex-{algorithm.lower()}.tex", "w")
