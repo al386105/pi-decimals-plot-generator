@@ -67,6 +67,12 @@ def load_mpi_results_from_file(results_path):
         decimals_computed = int(split_line[7])
         execution_time = float(split_line[8])
 
+        algorithm_tag_split = algorithm_tag.split('-')
+        algorithm_tag_split.pop(3)
+        algorithm_tag = f"{algorithm_tag_split[0]}-{algorithm_tag_split[1]}-{algorithm_tag_split[2]}"
+        if len(algorithm_tag_split) == 4:
+            algorithm_tag += f"-{algorithm_tag_split[3]}"
+
         # Check if the decimals computed are greater than the desired:
         if precision_used > decimals_computed:
             print("Something went wrong! It looks like some executions did not go as expected.")
