@@ -70,8 +70,8 @@ def get_speed_ups_latex_table(results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp/results-2022-12.csv'
-    path_to_save = 'tables/omp/'
+    results_path = 'results/omp-2022-12.csv'
+    path_to_save = 'tables/'
 
     data = load_omp_results_from_file(results_path)
 

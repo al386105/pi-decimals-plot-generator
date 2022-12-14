@@ -47,7 +47,7 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/iterations/omp-iterations-2022-12-a.csv'
-    path_to_save = 'plots/iterations/'
+    results_path = 'results/omp-iterations-2022-12-a.csv'
+    path_to_save = 'plots/'
 
     load_iteration_times_from_file()

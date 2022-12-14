@@ -75,8 +75,8 @@ def get_speed_ups_latex_table(results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/mpi/results-2022-12.csv'
-    path_to_save = 'tables/mpi/'
+    results_path = 'results/mpi-2022-12.csv'
+    path_to_save = 'tables/'
     procs_to_show = [0, 10, 40, 80, 120, 160, 200]  # 0 means 1 proc
 
     data = load_mpi_results_from_file(results_path)

@@ -32,7 +32,7 @@ def generate_comparison_speed_up_plot(threads_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}su-comparison.png")
+    plt.savefig(f"{path_to_save}su-omp-comparison.png")
     plt.close()
 
 
@@ -65,14 +65,14 @@ def generate_comparison_execution_times_plot(threads_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}ex-comparison.png")
+    plt.savefig(f"{path_to_save}ex-omp-comparison.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp/results-2022-12.csv'
-    path_to_save = 'plots/omp/'
+    results_path = 'results/omp-2022-12.csv'
+    path_to_save = 'plots/'
 
     data = load_omp_results_from_file(results_path)
 

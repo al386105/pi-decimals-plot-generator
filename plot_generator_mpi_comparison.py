@@ -32,7 +32,7 @@ def generate_comparison_speed_up_plot(procs_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}su-comparison.png")
+    plt.savefig(f"{path_to_save}su-mpi-comparison.png")
     plt.close()
 
 
@@ -65,14 +65,14 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}ex-comparison.png")
+    plt.savefig(f"{path_to_save}ex-mpi-comparison.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/mpi/results-2022-12.csv'
-    path_to_save = 'plots/mpi/'
+    results_path = 'results/mpi-2022-12.csv'
+    path_to_save = 'plots/'
 
     data = load_mpi_results_from_file(results_path)
 

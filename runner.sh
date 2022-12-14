@@ -4,7 +4,7 @@ python3 latex_table_generator_omp_algorithms.py
 python3 latex_table_generator_omp_comparison.py
 
 python3 plot_generator_iterations_time.py
-python3 plot_generator_hybrid_algorithms.py
+#python3 plot_generator_hybrid_algorithms.py
 
 python3 plot_generator_mpi_algorithms.py
 python3 plot_generator_mpi_comparison.py

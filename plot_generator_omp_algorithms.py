@@ -50,7 +50,7 @@ def generate_speed_up_plot(algorithm_name, threads_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}su-{algorithm_name.lower()}.png")
+    plt.savefig(f"{path_to_save}su-omp-{algorithm_name.lower()}.png")
     plt.close()
 
 
@@ -83,14 +83,14 @@ def generate_execution_times_plot(algorithm_name, threads_used, execution_times)
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}ex-{algorithm_name.lower()}.png")
+    plt.savefig(f"{path_to_save}ex-omp-{algorithm_name.lower()}.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp/results-2022-12.csv'
-    path_to_save = 'plots/omp/'
+    results_path = 'results/omp-2022-12.csv'
+    path_to_save = 'plots/'
 
     data = load_omp_results_from_file(results_path)
     generate_algorithm_plots(data)

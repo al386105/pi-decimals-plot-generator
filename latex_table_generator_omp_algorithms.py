@@ -74,15 +74,15 @@ def get_speed_up_latex_table(algorithm_tag, results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp/results-2022-12.csv'
-    path_to_save = 'tables/omp/'
+    results_path = 'results/omp-2022-12.csv'
+    path_to_save = 'tables/'
 
     data = load_omp_results_from_file(results_path)
 
     for algorithm in data.keys():
-        file = open(path_to_save + f"ex-{algorithm.lower()}.tex", "w")
+        file = open(path_to_save + f"ex-omp-{algorithm.lower()}.tex", "w")
         file.write(get_execution_time_latex_table(algorithm, data[algorithm]))
         file.close()
-        file = open(path_to_save + f"su-{algorithm.lower()}.tex", "w")
+        file = open(path_to_save + f"su-omp-{algorithm.lower()}.tex", "w")
         file.write(get_speed_up_latex_table(algorithm, data[algorithm]))
         file.close()
