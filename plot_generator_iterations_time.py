@@ -11,7 +11,7 @@ def load_iteration_times_from_file():
         split_line = line.split(';')
         if len(split_line) > 1:
             algorithm_tag = split_line[2]
-            # If we are sure that the line is a mpi result, we can discard the thread distribution way
+            # We can discard the thread distribution because the result is of a single thread
             thread_distribution = algorithm_tag.split('-')[-1]
             algorithm_tag = algorithm_tag[:-(len(thread_distribution) + 1)]
             precision_used = split_line[3]
