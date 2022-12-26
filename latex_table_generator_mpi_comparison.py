@@ -1,3 +1,4 @@
+import styles
 from styles import mpi_algorithms_excluded, default_comparison_precision
 from data_loader import load_mpi_results_from_file
 
@@ -75,7 +76,7 @@ def get_speed_ups_latex_table(results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/mpi-2022-12.csv'
+    results_path = styles.mpi_results_file
     path_to_save = 'tables/'
     procs_to_show = [0, 10, 40, 80, 120, 160, 200]  # 0 means 1 proc
 

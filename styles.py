@@ -1,5 +1,7 @@
 show_plots_title = False
 default_comparison_precision = 200_000
+omp_results_file = 'results/omp-2022-12-25-n0.csv'
+mpi_results_file = 'results/mpi-2022-12.csv'
 mpi_algorithms_excluded = ['GMP-CHD-SME-CHTXX']
 omp_algorithms_excluded = ['GMP-CHD-SME-CHTXX']
 color_lines = ['#5383EC', '#D85040', '#F2BF41', '#34A853', '#FF6D01', '#46BDC6', '#9900FF', '#804000', '#FF0080', '#000000']

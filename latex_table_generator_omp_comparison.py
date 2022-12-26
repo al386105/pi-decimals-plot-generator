@@ -1,5 +1,5 @@
 from data_loader import load_omp_results_from_file
-from styles import default_comparison_precision
+from styles import default_comparison_precision, omp_results_file
 
 def get_execution_times_latex_table(results):
     data_rows = ""
@@ -70,7 +70,7 @@ def get_speed_ups_latex_table(results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp-2022-12.csv'
+    results_path = omp_results_file
     path_to_save = 'tables/'
 
     data = load_omp_results_from_file(results_path)

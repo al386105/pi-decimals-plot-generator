@@ -1,4 +1,5 @@
 from data_loader import load_omp_results_from_file
+from styles import omp_results_file
 
 
 def get_execution_time_latex_table(algorithm_tag, results):
@@ -74,10 +75,10 @@ def get_speed_up_latex_table(algorithm_tag, results):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp-2022-12.csv'
+    results_path = omp_results_file
     path_to_save = 'tables/'
 
-    data = load_omp_results_from_file(results_path)
+    data = load_omp_results_from_file(omp_results_file)
 
     for algorithm in data.keys():
         file = open(path_to_save + f"ex-omp-{algorithm.lower()}.tex", "w")

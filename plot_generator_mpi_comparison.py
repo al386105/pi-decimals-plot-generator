@@ -71,7 +71,7 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/mpi-2022-12.csv'
+    results_path = styles.mpi_results_file
     path_to_save = 'plots/'
 
     data = load_mpi_results_from_file(results_path)
