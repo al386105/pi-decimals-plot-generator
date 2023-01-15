@@ -18,7 +18,7 @@ def load_iteration_times_from_file():
             generate_iteration_times_plot(algorithm_tag, iteration_times, precision_used)
             iteration_times.clear()
         else:
-            iteration_times.append(float(line) * 1000)
+            iteration_times.append(float(line) * 1000)  # In millis
 
 
 def generate_iteration_times_plot(algorithm_name, iteration_times, precision_used):
@@ -32,7 +32,7 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
     plt.ylabel('Tiempo (ms)', fontdict=styles.font_subtitle)
     if styles.show_plots_title:
         plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n "
-              f"para calcular los primeros {precision_used} decimales", fontdict=styles.font_title)
+                  f"para calcular los primeros {precision_used} decimales", fontdict=styles.font_title)
 
     # Print text with mean, median...
     text = f"Media: {round(statistics.mean(iteration_times), 2)} ms\n" \
