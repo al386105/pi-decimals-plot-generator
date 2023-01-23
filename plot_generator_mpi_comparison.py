@@ -32,7 +32,7 @@ def generate_comparison_speed_up_plot(procs_used, speed_ups):
     plt.legend(loc='upper left')
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}su-mpi-comparison.png")
+    plt.savefig(f"{styles.path_to_save_plots}su-mpi-comparison.png")
     plt.close()
 
 
@@ -65,16 +65,12 @@ def generate_comparison_execution_times_plot(procs_used, execution_times):
     plt.legend(loc='upper right')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}ex-mpi-comparison.png")
+    plt.savefig(f"{styles.path_to_save_plots}ex-mpi-comparison.png")
     plt.close()
 
 
 if __name__ == '__main__':
-    # Set file and path to store the plots
-    results_path = styles.mpi_results_file
-    path_to_save = 'plots/'
-
-    data = load_mpi_results_from_file(results_path)
+    data = load_mpi_results_from_file(styles.mpi_results_file)
 
     # Generate the times plot and the speed_up plot
     exec_times = dict()  # exec_times = { algorithm_tag : list_ex_times }

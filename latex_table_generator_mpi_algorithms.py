@@ -78,7 +78,7 @@ def get_speed_up_latex_table(algorithm_tag, results):
 if __name__ == '__main__':
     # Set file and path to store the plots
     results_path = styles.mpi_results_file
-    path_to_save = 'tables/'
+    path_to_save = styles.path_to_save_tables
     procs_to_show = [0, 10, 40, 80, 120, 160, 200]  # 0 means 1 proc
 
     data = load_mpi_results_from_file(results_path)

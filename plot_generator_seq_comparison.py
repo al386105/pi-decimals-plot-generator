@@ -29,16 +29,12 @@ def generate_comparison_execution_times_plot(precision_used, execution_times):
     plt.legend(loc='upper left')
 
     # plt.show()
-    plt.savefig(f"{path_to_save}ex-seq-comparison.png")
+    plt.savefig(f"{styles.path_to_save_plots}ex-seq-comparison.png")
     plt.close()
 
 
 if __name__ == '__main__':
-    # Set file and path to store the plots
-    results_path = styles.omp_results_file
-    path_to_save = 'plots/'
-
-    data = load_omp_results_from_file(results_path)
+    data = load_omp_results_from_file(styles.omp_results_file)
 
     seq_exec_times = dict()  # seq_exec_times = { algorithm_tag : [seq_times] }
     for algorithm_key in data.keys():

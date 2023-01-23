@@ -44,13 +44,12 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
              bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
 
     # Save figure and close
-    plt.savefig(f"{path_to_save}it-{algorithm_name.lower()}.png")
+    plt.savefig(f"{styles.path_to_save_plots}it-{algorithm_name.lower()}.png")
     plt.close()
 
 
 if __name__ == '__main__':
     # Set file and path to store the plots
     results_path = 'results/omp-iterations-2022-12.csv'
-    path_to_save = 'plots/'
 
     load_iteration_times_from_file()

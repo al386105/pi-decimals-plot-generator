@@ -1,3 +1,4 @@
+import styles
 from data_loader import load_omp_results_from_file
 from styles import omp_results_file
 
@@ -76,7 +77,7 @@ def get_speed_up_latex_table(algorithm_tag, results):
 if __name__ == '__main__':
     # Set file and path to store the plots
     results_path = omp_results_file
-    path_to_save = 'tables/'
+    path_to_save = styles.path_to_save_tables
 
     data = load_omp_results_from_file(omp_results_file)
 
