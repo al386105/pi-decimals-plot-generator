@@ -44,10 +44,9 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
         i += 1
 
     # Set axis limits and steps
-    # plt.xticks(np.arange(0, 200 + 1, 10))
     plt.yticks(np.arange(0, 200 + 1, 10))
+    plt.xticks(rotation=30)
     ax.set_ylim([0, 200 + 1])
-    # ax.set_xlim([0, 200 + 1])
     plt.grid(axis='y')
 
     # Set tittles:
@@ -76,10 +75,8 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
         i += 1
 
     # Set axis limits and steps
-    plt.rcParams['xtick.labelsize'] = 8
-    # plt.xticks(np.arange(0, 200 + 1, 10))
-    # ax.set_xlim([0, 200 + 1])
-    # plt.grid(axis='y')
+    plt.xticks(rotation=30)
+    plt.grid(axis='y')
 
     # Set tittles:
     plt.xlabel('Número de procesos/hebras', fontdict=styles.font_subtitle)
