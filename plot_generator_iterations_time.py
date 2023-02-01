@@ -25,7 +25,7 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
     # Set the figure within the subplot
     fig, ax = plt.subplots(figsize=(9, 6))
 
-    ax.plot(iteration_times)
+    ax.scatter(range(len(iteration_times)), iteration_times, s=3)
 
     # Set tittles:
     plt.xlabel('Iteración', fontdict=styles.font_subtitle)
@@ -40,8 +40,8 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
            f"Max: {round(max(iteration_times), 2)} ms\n" \
            f"Min: {round(min(iteration_times), 2)} ms\n" \
            f"Iteraciones: {len(iteration_times)}"
-    plt.text(0.75, 0.5, text, ha='left', va='center', transform=ax.transAxes, fontdict=styles.font_text,
-             bbox=dict(boxstyle="square", fc="w", ec="0.5", alpha=0.5))
+    plt.text(0.012, 0.9, text, ha='left', va='center', transform=ax.transAxes, fontdict=styles.font_text,
+             bbox=dict(boxstyle="square", fc="w", ec="0.1", alpha=0.5))
 
     # Save figure and close
     plt.savefig(f"{styles.path_to_save_plots}it-{algorithm_name.lower()}.png")
@@ -50,6 +50,6 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
 
 if __name__ == '__main__':
     # Set file and path to store the plots
-    results_path = 'results/omp-iterations-2022-12.csv'
+    results_path = 'results/iterations-2023-02.csv'
 
     load_iteration_times_from_file()

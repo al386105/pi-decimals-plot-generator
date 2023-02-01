@@ -1,5 +1,5 @@
-rm -drf tables
-rm -drf plots
+rm tables/*.tex
+rm plots/*.png
 mkdir tables plots
 
 python3 latex_table_generator_mpi_algorithms.py

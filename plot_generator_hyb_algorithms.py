@@ -74,7 +74,6 @@ def generate_execution_times_plot(algorithm_name, procs_and_threads_used, execut
                 linestyle='solid', linewidth=1.5, markersize=5, label=f"prec. {precision}")
         i += 1
 
-    # Set axis limits and steps
     plt.xticks(rotation=30)
     plt.grid(axis='y')
 
