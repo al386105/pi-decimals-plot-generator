@@ -2,3 +2,5 @@
 .idea
 *.png
 *.tex
+*.pyc
+.DS_Store

@@ -1,20 +1,21 @@
 import styles
 from data_loader import load_omp_results_from_file
-from styles import default_comparison_precision, omp_results_file
+from styles import default_comparison_precision, omp_results_file, omp_algorithms_excluded
 
 def get_execution_times_latex_table(results):
     data_rows = ""
     for algorithm_key in results.keys():
-        times = list(results[algorithm_key][default_comparison_precision].values())
-        row = "\t" + algorithm_key
-        row += (20 - len(row)) * " "
-        for time in times:
-            string_time = f"& {round(time, 2)}"
-            string_time = string_time.replace('.', ',')
-            string_time += (12 - len(string_time)) * " "
-            row += string_time
-        row += "\\\\ \n\t\\hline \n"
-        data_rows += row
+        if algorithm_key not in omp_algorithms_excluded:
+            times = list(results[algorithm_key][default_comparison_precision].values())
+            row = "\t" + algorithm_key
+            row += (20 - len(row)) * " "
+            for time in times:
+                string_time = f"& {round(time, 2)}"
+                string_time = string_time.replace('.', ',')
+                string_time += (12 - len(string_time)) * " "
+                row += string_time
+            row += "\\\\ \n\t\\hline \n"
+            data_rows += row
 
     latex_table = "\\begin{table}[H]\n" \
                   "\\begin{center}\n" \
@@ -38,17 +39,18 @@ def get_execution_times_latex_table(results):
 def get_speed_ups_latex_table(results):
     data_rows = ""
     for algorithm_key in results.keys():
-        times = list(results[algorithm_key][default_comparison_precision].values())
-        speed_ups = [times[0] / times[i] for i in range(len(times))]
-        row = "\t" + algorithm_key
-        row += (20 - len(row)) * " "
-        for speed_up in speed_ups:
-            string_su = f"& {round(speed_up, 2)}"
-            string_su = string_su.replace('.', ',')
-            string_su += (12 - len(string_su)) * " "
-            row += string_su
-        row += "\\\\ \n\t\\hline \n"
-        data_rows += row
+        if algorithm_key not in omp_algorithms_excluded:
+            times = list(results[algorithm_key][default_comparison_precision].values())
+            speed_ups = [times[0] / times[i] for i in range(len(times))]
+            row = "\t" + algorithm_key
+            row += (20 - len(row)) * " "
+            for speed_up in speed_ups:
+                string_su = f"& {round(speed_up, 2)}"
+                string_su = string_su.replace('.', ',')
+                string_su += (12 - len(string_su)) * " "
+                row += string_su
+            row += "\\\\ \n\t\\hline \n"
+            data_rows += row
 
     latex_table = "\\begin{table}[H]\n" \
                   "\\begin{center}\n" \
