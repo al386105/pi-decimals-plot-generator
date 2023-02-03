@@ -1,8 +1,9 @@
 show_plots_title = False
 default_comparison_precision = 200_000
-omp_results_file = 'results/omp-2022-12-25-n0.csv'
+omp_results_file = 'results/omp-2023-02-03-n0.csv'
 mpi_results_file = 'results/mpi-2022-12.csv'
 hyb_results_file = 'results/hyb-2023-1-1.csv'
+iterations_results_file = 'results/iterations-2023-02-nasp.csv'
 path_to_save_plots = 'plots/'
 path_to_save_tables = 'tables/'
 mpi_algorithms_excluded = ['GMP-CHD-SME-CHTXX']

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def load_iteration_times_from_file():
-    file = open(results_path, "r")
+    file = open(styles.iterations_results_file, "r")
 
     iteration_times = []
     for line in file:
@@ -18,7 +18,7 @@ def load_iteration_times_from_file():
             generate_iteration_times_plot(algorithm_tag, iteration_times, precision_used)
             iteration_times.clear()
         else:
-            iteration_times.append(float(line) * 1000)  # In millis
+            iteration_times.append(float(line))  # In millis
 
 
 def generate_iteration_times_plot(algorithm_name, iteration_times, precision_used):
@@ -49,7 +49,4 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
 
 
 if __name__ == '__main__':
-    # Set file and path to store the plots
-    results_path = 'results/iterations-2023-02.csv'
-
     load_iteration_times_from_file()
