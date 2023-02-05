@@ -21,7 +21,7 @@ def get_execution_times_latex_table(results):
                   "\\begin{center}\n" \
                   "\\large\n" \
                   "\\caption{Tiempos de ejecución (en segundos) de los algoritmos y librerías con " \
-                  + str(default_comparison_precision) + \
+                  + "{:,}".format(default_comparison_precision).replace(",", ".") + \
                   " decimales de precisión, utilizando el paradigma de programación con OpenMP.}\n" \
                   "\\label{table:ex-omp-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \

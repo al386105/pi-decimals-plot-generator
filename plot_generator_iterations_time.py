@@ -31,8 +31,8 @@ def generate_iteration_times_plot(algorithm_name, iteration_times, precision_use
     plt.xlabel('Iteración', fontdict=styles.font_subtitle)
     plt.ylabel('Tiempo (ms)', fontdict=styles.font_subtitle)
     if styles.show_plots_title:
-        plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n "
-                  f"para calcular los primeros {precision_used} decimales", fontdict=styles.font_title)
+        precision_used_miles = "{:,}".format(int(precision_used)).replace(",", ".") 
+        plt.title(f"Coste de las iteraciones del algoritmo {algorithm_name} \n para calcular los primeros {precision_used_miles} decimales" , fontdict=styles.font_title)
 
     # Print text with mean, median...
     text = f"Media: {round(statistics.mean(iteration_times), 2)} ms\n" \
