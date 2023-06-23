@@ -78,7 +78,7 @@ if __name__ == '__main__':
     threads_used = list()
 
     for algorithm_key in data.keys():
-        if algorithm_key not in styles.omp_algorithms_excluded:   
+        if algorithm_key in styles.omp_algorithms_included:   
             exec_times[algorithm_key] = list(data[algorithm_key][styles.default_comparison_precision].values())
             threads_used = list(data[algorithm_key][styles.default_comparison_precision].keys())
             algorithm_speed_ups = [exec_times[algorithm_key][0] / exec_times[algorithm_key][i] for i in range(len(exec_times[algorithm_key]))]

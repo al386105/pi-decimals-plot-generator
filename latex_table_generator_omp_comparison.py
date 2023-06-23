@@ -1,11 +1,11 @@
 import styles
 from data_loader import load_omp_results_from_file
-from styles import default_comparison_precision, omp_results_file, omp_algorithms_excluded
+from styles import default_comparison_precision, omp_results_file, omp_algorithms_included
 
 def get_execution_times_latex_table(results):
     data_rows = ""
     for algorithm_key in results.keys():
-        if algorithm_key not in omp_algorithms_excluded:
+        if algorithm_key in omp_algorithms_included:
             times = list(results[algorithm_key][default_comparison_precision].values())
             row = "\t" + algorithm_key
             row += (20 - len(row)) * " "
@@ -39,7 +39,7 @@ def get_execution_times_latex_table(results):
 def get_speed_ups_latex_table(results):
     data_rows = ""
     for algorithm_key in results.keys():
-        if algorithm_key not in omp_algorithms_excluded:
+        if algorithm_key in omp_algorithms_included:
             times = list(results[algorithm_key][default_comparison_precision].values())
             speed_ups = [times[0] / times[i] for i in range(len(times))]
             row = "\t" + algorithm_key

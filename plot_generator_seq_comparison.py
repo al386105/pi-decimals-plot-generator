@@ -1,5 +1,5 @@
 from data_loader import load_omp_results_from_file
-from styles import omp_algorithms_excluded
+from styles import omp_algorithms_included
 import matplotlib.pyplot as plt
 import numpy as np
 import styles
@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     seq_exec_times = dict()  # seq_exec_times = { algorithm_tag : [seq_times] }
     for algorithm_key in data.keys():
-        if algorithm_key in omp_algorithms_excluded:
+        if algorithm_key not in omp_algorithms_included:
             continue
         seq_times = list()
         for precision_key in data[algorithm_key].keys():
