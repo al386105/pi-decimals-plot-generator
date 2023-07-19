@@ -24,7 +24,7 @@ def get_execution_times_latex_table(results):
                   "\\large\n" \
                   "\\caption{Tiempos de ejecución (en segundos) de los algoritmos y librerías con " \
                   + "{:,}".format(default_comparison_precision).replace(",", ".") + \
-                  " decimales de precisión, utilizando el paradigma de programación con MPI.}\n" \
+                  " decimales de precisión, utilizando el paradigma de programación con MPI}\n" \
                   "\\label{table:ex-mpi-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \
@@ -60,7 +60,7 @@ def get_speed_ups_latex_table(results):
                   "\\large\n" \
                   "\\caption{Escalabilidad de los algoritmos y librerías con " \
                   + str(default_comparison_precision) + \
-                  " decimales de precisión, utilizando el paradigma de programación con MPI.}\n" \
+                  " decimales de precisión, utilizando el paradigma de programación con MPI}\n" \
                   "\\label{table:su-mpi-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \

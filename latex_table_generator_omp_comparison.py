@@ -22,7 +22,7 @@ def get_execution_times_latex_table(results):
                   "\\large\n" \
                   "\\caption{Tiempos de ejecución (en segundos) de los algoritmos y librerías con " \
                   + "{:,}".format(default_comparison_precision).replace(",", ".") + \
-                  " decimales de precisión, utilizando el paradigma de programación con OpenMP.}\n" \
+                  " decimales de precisión, utilizando el paradigma de programación con OpenMP}\n" \
                   "\\label{table:ex-omp-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \
@@ -57,7 +57,7 @@ def get_speed_ups_latex_table(results):
                   "\\large\n" \
                   "\\caption{Escalabilidad de los algoritmos y librerías con " \
                   + str(default_comparison_precision) + \
-                  " decimales de precisión, utilizando el paradigma de programación con OpenMP.}\n" \
+                  " decimales de precisión, utilizando el paradigma de programación con OpenMP}\n" \
                   "\\label{table:su-omp-comparison}\n" \
                   "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
                   "\\hline\n" \

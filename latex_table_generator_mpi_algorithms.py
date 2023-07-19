@@ -22,7 +22,7 @@ def get_execution_time_latex_table(algorithm_tag, results):
                   "\\large\n" \
                   "\\caption{Tiempos de ejecución (en segundos) del algoritmo " \
                   + algorithm_tag + \
-                  " utilizando el paradigma de programación con MPI.}\n" \
+                  " utilizando el paradigma de programación con MPI}\n" \
                   "\\label{" \
                   f"table:ex-mpi-{algorithm_tag.lower()}" \
                   "}\n" \
@@ -59,7 +59,7 @@ def get_speed_up_latex_table(algorithm_tag, results):
                   "\\large\n" \
                   "\\caption{Escalabilidad del algoritmo " \
                   + algorithm_tag + \
-                  " utilizando el paradigma de programación con MPI.}\n" \
+                  " utilizando el paradigma de programación con MPI}\n" \
                   "\\label{" \
                   f"table:su-mpi-{algorithm_tag.lower()}" \
                   "}\n" \
