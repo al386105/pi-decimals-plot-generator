@@ -6,11 +6,11 @@ def get_execution_time_latex_table(algorithm_tag, results):
     data_rows = ""
     for precision_key in results.keys():
         times = list(results[precision_key].values())
-        row = "\t" + str(precision_key)
+        row = "\t \\textbf{" + str(precision_key) + "}"
         row += (8 - len(row)) * " "
         for i, time in enumerate(times):
             if i * 10 in procs_to_show:
-                string_time = f"& {round(time, 2)}"
+                string_time = " & \multicolumn{1}{c|}{" + str(round(time, 2)) + "}"
                 string_time = string_time.replace('.', ',')
                 string_time += (12 - len(string_time)) * " "
                 row += string_time
@@ -26,10 +26,11 @@ def get_execution_time_latex_table(algorithm_tag, results):
                   "\\label{" \
                   f"table:ex-mpi-{algorithm_tag.lower()}" \
                   "}\n" \
-                  "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
+                  "\\begin{tabular}{|c|ccccccc|}\n" \
                   "\\hline\n" \
-                  "\t\\multirow{2}{*}{\\textbf{Precisión}} & \multicolumn{7}{ | c | }{\\textbf{Número de procesos}} \\\\\n" \
-                  "\t\\cline{2-8} & \\textbf{1} & \\textbf{10} & \\textbf{40} & \\textbf{80} & \\textbf{120} & \\textbf{160} & \\textbf{200} \\\\\n" \
+                  "\t\\cellcolor{Grey} & \\multicolumn{7}{c|}{\\cellcolor{Grey}\\textbf{Número de procesos}} \\\\\n" \
+                  "\t\\cline{2-8} \n" \
+                  "\t\\multirow{-2}{*}{\\cellcolor{Grey}\\textbf{Precisión}} & \\multicolumn{1}{c|}{\\textbf{1}} & \\multicolumn{1}{c|}{\\textbf{10}} & \\multicolumn{1}{c|}{\\textbf{40}} & \\multicolumn{1}{c|}{\\textbf{80}} & \\multicolumn{1}{c|}{\\textbf{120}} & \\multicolumn{1}{c|}{\\textbf{160}} & \\textbf{200} \\\\\n " \
                   "\t\\hline\n" \
                   + data_rows + \
                   "\\end{tabular}\n" \
@@ -43,11 +44,11 @@ def get_speed_up_latex_table(algorithm_tag, results):
     for precision_key in results.keys():
         times = list(results[precision_key].values())
         speed_ups = [times[0] / times[i] for i in range(len(times))]
-        row = "\t" + str(precision_key)
+        row = "\t \\textbf{" + str(precision_key) + "}"
         row += (8 - len(row)) * " "
         for i, speed_up in enumerate(speed_ups):
             if i * 10 in procs_to_show:
-                string_su = f"& {round(speed_up, 2)}"
+                string_su = " & \multicolumn{1}{c|}{" + str(round(speed_up, 2)) + "}"
                 string_su = string_su.replace('.', ',')
                 string_su += (10 - len(string_su)) * " "
                 row += string_su
@@ -63,10 +64,11 @@ def get_speed_up_latex_table(algorithm_tag, results):
                   "\\label{" \
                   f"table:su-mpi-{algorithm_tag.lower()}" \
                   "}\n" \
-                  "\\begin{tabular}{| c | c | c | c | c | c | c | c |}\n" \
+                  "\\begin{tabular}{|c|ccccccc|}\n" \
                   "\\hline\n" \
-                  "\t\\multirow{2}{*}{\\textbf{Precisión}} & \multicolumn{7}{ | c | }{\\textbf{Número de procesos}} \\\\\n" \
-                  "\t\\cline{2-8} & \\textbf{1} & \\textbf{10} & \\textbf{40} & \\textbf{80} & \\textbf{120} & \\textbf{160} & \\textbf{200} \\\\\n" \
+                  "\t\\cellcolor{Grey} & \\multicolumn{7}{c|}{\\cellcolor{Grey}\\textbf{Número de procesos}} \\\\\n" \
+                  "\t\\cline{2-8} \n" \
+                  "\t\\multirow{-2}{*}{\\cellcolor{Grey}\\textbf{Precisión}} & \\multicolumn{1}{c|}{\\textbf{1}} & \\multicolumn{1}{c|}{\\textbf{10}} & \\multicolumn{1}{c|}{\\textbf{40}} & \\multicolumn{1}{c|}{\\textbf{80}} & \\multicolumn{1}{c|}{\\textbf{120}} & \\multicolumn{1}{c|}{\\textbf{160}} & \\textbf{200} \\\\\n " \
                   "\t\\hline\n" \
                   + data_rows + \
                   "\\end{tabular}\n" \
