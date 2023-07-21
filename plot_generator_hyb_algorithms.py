@@ -44,9 +44,9 @@ def generate_speed_up_plot(algorithm_name, procs_and_threads_used, speed_ups):
         i += 1
 
     # Set axis limits and steps
-    plt.yticks(np.arange(0, 200 + 1, 10))
+    plt.yticks(np.arange(0, 200, 10))
     plt.xticks(rotation=30)
-    ax.set_ylim([0, 200 + 1])
+    ax.set_ylim([0, 200])
     plt.grid(axis='y')
 
     # Set tittles:

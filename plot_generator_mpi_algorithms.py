@@ -34,10 +34,10 @@ def generate_speed_up_plot(algorithm_name, procs_used, speed_ups):
         i += 1
 
     # Set axis limits and steps
-    plt.xticks(np.arange(0, max(procs_used) + 1, 10))
-    plt.yticks(np.arange(0, max(procs_used) + 1, 10))
-    ax.set_ylim([0, max(procs_used) + 1])
-    ax.set_xlim([0, max(procs_used) + 1])
+    plt.xticks(np.arange(0, max(procs_used), 10))
+    plt.yticks(np.arange(0, max(procs_used), 10))
+    ax.set_ylim([0, max(procs_used)])
+    ax.set_xlim([0, max(procs_used)])
     plt.grid(axis='y')
 
     # Set tittles:
@@ -66,8 +66,8 @@ def generate_execution_times_plot(algorithm_name, procs_used, execution_times):
         i += 1
 
     # Set axis limits and steps
-    plt.xticks(np.arange(0, max(procs_used) + 1, 10))
-    ax.set_xlim([0, max(procs_used) + 1])
+    plt.xticks(np.arange(0, max(procs_used), 10))
+    ax.set_xlim([0, max(procs_used)])
     plt.grid(axis='y')
 
     # Set tittles:
