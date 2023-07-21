@@ -75,15 +75,16 @@ if __name__ == '__main__':
     speed_ups = dict()   # speed_ups  = { algorithm_tag : list_speed_ups }
     procs_threads_used = []
     for algorithm_key in data.keys():
-        list_ex_times = []
-        procs_threads_used = []
-        for procs_key in data[algorithm_key][styles.default_comparison_precision].keys():
-            for threads_key in data[algorithm_key][styles.default_comparison_precision][procs_key]:
-                procs_threads_used.append(f'{procs_key}/{threads_key}')
-                list_ex_times.append(data[algorithm_key][styles.default_comparison_precision][procs_key][threads_key])
-        exec_times[algorithm_key] = list_ex_times
-        algorithm_speed_ups = [exec_times[algorithm_key][0] / exec_times[algorithm_key][i] for i in range(len(exec_times[algorithm_key]))]
-        speed_ups[algorithm_key] = algorithm_speed_ups
+        if algorithm_key not in styles.mpi_algorithms_excluded:
+            list_ex_times = []
+            procs_threads_used = []
+            for procs_key in data[algorithm_key][styles.default_comparison_precision].keys():
+                for threads_key in data[algorithm_key][styles.default_comparison_precision][procs_key]:
+                    procs_threads_used.append(f'{procs_key}/{threads_key}')
+                    list_ex_times.append(data[algorithm_key][styles.default_comparison_precision][procs_key][threads_key])
+            exec_times[algorithm_key] = list_ex_times
+            algorithm_speed_ups = [exec_times[algorithm_key][0] / exec_times[algorithm_key][i] for i in range(len(exec_times[algorithm_key]))]
+            speed_ups[algorithm_key] = algorithm_speed_ups
 
     # Generate execution times plot and speed up plots
     generate_comparison_execution_times_plot(procs_threads_used, exec_times)

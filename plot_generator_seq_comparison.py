@@ -39,13 +39,12 @@ if __name__ == '__main__':
 
     seq_exec_times = dict()  # seq_exec_times = { algorithm_tag : [seq_times] }
     for algorithm_key in data.keys():
-        if algorithm_key not in omp_algorithms_included:
-            continue
-        seq_times = list()
-        for precision_key in data[algorithm_key].keys():
-            seq_times.append(data[algorithm_key][precision_key][1])
-        seq_exec_times[algorithm_key] = seq_times
-        seq_exec_times[algorithm_key].reverse()
+        if algorithm_key in omp_algorithms_included:
+            seq_times = list()
+            for precision_key in data[algorithm_key].keys():
+                seq_times.append(data[algorithm_key][precision_key][1])
+            seq_exec_times[algorithm_key] = seq_times
+            seq_exec_times[algorithm_key].reverse()
 
     precision_used = list(data[algorithm_key].keys())
     precision_used.reverse()
